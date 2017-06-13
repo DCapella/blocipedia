@@ -37,6 +37,7 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+gem 'bootstrap-sass'
 # reference: https://github.com/twbs/bootstrap-rubygem
 gem 'bootstrap'
 # Figaro was written to make it easy to securely configure Rails applications.
