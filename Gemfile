@@ -41,6 +41,9 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootstrap'
 # Figaro was written to make it easy to securely configure Rails applications.
 gem 'figaro'
+# Devise is a flexible authentication solution for Rails based on Warded. More info: https://github.com/plataformatec/devise#getting-started
+gem 'devise'
+###########################################
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
