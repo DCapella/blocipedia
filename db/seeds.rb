@@ -1,6 +1,22 @@
 require 'random_data'
 
-User.create!(email: "d_capella@yahoo.com", password: "password")
+User.create!(
+  email: "admin@admin.com",
+  password: "password",
+  role: "admin"
+)
+
+User.create!(
+  email: "premium@premium.com",
+  password: "password",
+  role: "premium"
+)
+
+User.create!(
+  email: "standard@standard.com",
+  password: "password",
+  role: "standard"
+)
 
 5.times do
   User.create!(

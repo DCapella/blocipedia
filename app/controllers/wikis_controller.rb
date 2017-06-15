@@ -1,4 +1,7 @@
 class WikisController < ApplicationController
+  before_action :authorize_standard, except: [:index, :show]
+  before_action :authorize_premium, except: [:index, :show, :edit, :new, :create, :edit, :update]
+
   def index
     @wikis = Wiki.all
   end
@@ -32,6 +35,7 @@ class WikisController < ApplicationController
   def update
     @wiki = Wiki.find(params[:id])
     wiki_params
+    #authorize @wiki
 
     if @wiki.save
       flash[:notice] = "Wiki was updated."
@@ -58,5 +62,21 @@ class WikisController < ApplicationController
   def wiki_params
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
+  end
+
+  def authorize_standard
+    if current_user.standard?
+      flash[:alert] = "You must be an admin or premium user to do that."
+      redirect_to wikis_path
+    end
+  end
+
+  def authorize_premium
+    wiki = Wiki.find(params[:id])
+
+    unless current_user == wiki.user || current_user.admin?
+      flash[:alert] = "You must be an admin or the author to do that."
+      redirect_to [wiki]
+    end
   end
 end
