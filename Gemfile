@@ -15,6 +15,9 @@ group :production do
   # Makes running your Rails app easier. Based on the ideas behind 12.factor.net
   gem 'rails_12factor'
 end
+
+# Pundit proves a set of helpers which build a simple, robust and scaleable authorization system. [https://github.com/elabs/pundit/blob/master/README.md#policies]
+gem "pundit"
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -37,6 +40,7 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+gem 'bootstrap-sass'
 # reference: https://github.com/twbs/bootstrap-rubygem
 gem 'bootstrap'
 # Figaro was written to make it easy to securely configure Rails applications.
