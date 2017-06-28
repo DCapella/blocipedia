@@ -1,5 +1,5 @@
 class WikisController < ApplicationController
-  before_action :authorize_standard, except: [:index, :show, :downgrade]
+  before_action :authorize_standard, except: [:index, :show, :downgrade, :new, :edit, :create, :update, :destroy]
   before_action :authorize_premium, except: [:index, :show, :edit, :new, :create, :edit, :update, :downgrade]
 
   def index
@@ -59,17 +59,19 @@ class WikisController < ApplicationController
   end
 
   def downgrade
-    flash[:notice] = "You are now a standard user, #{current_user.email}, come back!"
+    current_user.wikis.each do |wiki|
+      wiki.update_attribute(:private, false)
+    end
     current_user.standard!
+    flash[:notice] = "You are now a standard user, #{current_user.email}, come back!"
     redirect_to wikis_url
   end
 
   private
   def wiki_params
-    if @wiki.nil?
-      @wiki.title = params[:wiki][:title]
-      @wiki.body = params[:wiki][:body]
-    end
+    @wiki.title = params[:wiki][:title]
+    @wiki.body = params[:wiki][:body]
+    @wiki.private = params[:wiki][:private]
   end
 
   def authorize_standard
