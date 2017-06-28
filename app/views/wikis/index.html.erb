@@ -9,7 +9,11 @@
       <div class="media">
         <div class="media-body">
           <h4 class="media-heading">
-            <%= link_to wiki.title, wiki %>
+            <% if wiki.private == true %>
+              <b><%= link_to wiki.title, wiki, { :style=>"color: darkred" } %></b>
+            <% else %>
+              <%= link_to wiki.title, wiki %>
+            <% end %>
           </h4>
         </div>
       </div>
