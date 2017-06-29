@@ -16,6 +16,8 @@ group :production do
   gem 'rails_12factor'
 end
 
+# Redcarpet is a Ruby library for Markdown processing (https://github.com/vmg/redcarpet)
+gem 'redcarpet'
 # Stripe EDIT ME
 gem 'stripe'
 # Pundit proves a set of helpers which build a simple, robust and scaleable authorization system. [https://github.com/elabs/pundit/blob/master/README.md#policies]
