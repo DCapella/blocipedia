@@ -1,14 +1,16 @@
 <h1>
   <%= @wiki.title %> <br>
   <small>
-    submitted <%= time_ago_in_words(@wiki.created_at) %> ago by <%= @wiki.user.email %>
+    <h5>
+      submitted <%= time_ago_in_words(@wiki.created_at) %> ago by <%= @wiki.user.email %>
+    </h5>
   </small>
 </h1>
 
 <div class="row">
   <div class="col-md-8">
-    <% if current_user.admin? || current_user.premium? %>
-      <p><%= markdown(@wiki.body) %></p>
+    <% if user_is_authorized_for_private_wiki?(@wiki) %>
+      <p><h4><%= markdown(@wiki.body) %></h4></p>
     <% else %>
       <p><i>This post was made private by <b><%= @wiki.user.email %></b>.</i></p>
     <% end %>
@@ -19,4 +21,14 @@
       <%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this wiki?'} %>
     <% end %>
   </div>
+  <% if @wiki.private %>
+    <div class="col-md-8">
+      <h3>Collaborators</h3>
+      <%= render @wiki.collaborators %>
+      </br>
+      <% if current_user %>
+        <%= render 'collaborators/form', collaborator: Collaborator.new, wiki: @wiki %>
+      <% end %>
+    </div>
+  <% end %>
 </div>

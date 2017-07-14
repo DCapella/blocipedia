@@ -1,0 +1,10 @@
+<% if current_user == @wiki.user %>
+  <h4>Add a collaborator</h4>
+  <%= form_for [wiki, collaborator] do |f| %>
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.text_field :email, class: 'form-control', placeholder: "Enter a collaborator" %>
+    </div>
+    <%= f.submit "Submit collaborator", class: 'btn btn-default pull-right' %>
+  <% end %>
+<% end %>
