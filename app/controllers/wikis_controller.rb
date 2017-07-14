@@ -3,7 +3,8 @@ class WikisController < ApplicationController
   before_action :authorize_premium, except: [:index, :show, :edit, :new, :create, :edit, :update, :downgrade]
 
   def index
-    @wikis = Wiki.all
+    #@wikis = Wiki.all
+    @wikis = policy_scope(Wiki)
   end
 
   def show
@@ -35,6 +36,7 @@ class WikisController < ApplicationController
   def update
     @wiki = Wiki.find(params[:id])
     wiki_params
+    @wiki.collaborators = params[:wiki][:email]
     #authorize @wiki
 
     if @wiki.save

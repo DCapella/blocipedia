@@ -21,4 +21,14 @@
       <%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure you want to delete this wiki?'} %>
     <% end %>
   </div>
+  <% if @wiki.private %>
+    <div class="col-md-8">
+      <h3>Collaborators</h3>
+      <%= render @wiki.collaborators %>
+      </br>
+      <% if current_user %>
+        <%= render 'collaborators/form', collaborator: Collaborator.new, wiki: @wiki %>
+      <% end %>
+    </div>
+  <% end %>
 </div>

@@ -4,6 +4,6 @@ module WikisHelper
   end
 
   def user_is_authorized_for_private_wiki?(wiki)
-    current_user.admin? || current_user.premium? || !wiki.private
+    current_user.admin? || !wiki.private || current_user == wiki.user || wiki.collaborators.exists?('email' => current_user.email)
   end
 end

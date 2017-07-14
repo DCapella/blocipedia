@@ -1,0 +1,11 @@
+<% if user_is_authorized_for_private_wiki?(@wiki) %>
+  <div class="media">
+    <div class="media-body">
+      <small>
+        <%= collaborator.email %>
+        <% if current_user == @wiki.user %>
+          | <%= link_to "Remove Callaborator", [@wiki, collaborator], method: :delete %>
+        <% end %>
+      </small>
+  </div>
+<% end %>
